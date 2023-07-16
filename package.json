@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "npm run lint -- --fix && prettier --write src"
   },
   "dependencies": {
     "@types/node": "20.4.2",
@@ -25,5 +26,9 @@
   "volta": {
     "node": "18.16.1",
     "npm": "9.8.0"
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^8.8.0",
+    "prettier": "^3.0.0"
   }
 }
