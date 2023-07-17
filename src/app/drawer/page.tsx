@@ -1,3 +1,3 @@
-export default function Drawer() {
-    return <p>Drawer</p>
+export default function DrawerPage() {
+  return <p>Drawer</p>;
 }
