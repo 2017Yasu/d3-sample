@@ -1,7 +1,7 @@
 'use client';
 
 import * as d3 from 'd3';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 type Props = {
   data: number[];
@@ -11,6 +11,7 @@ type Props = {
   marginRight?: number;
   marginBottom?: number;
   marginLeft?: number;
+  showScale?: boolean;
 };
 
 export default function LinePlot(props: Props) {
@@ -20,13 +21,26 @@ export default function LinePlot(props: Props) {
     height = 400,
     marginTop = 20,
     marginRight = 20,
-    marginBottom = 20,
-    marginLeft = 20,
+    marginBottom = 30,
+    marginLeft = 40,
+    showScale = true,
   } = props;
+
+  const gx = useRef<SVGGElement>(null);
+  const gy = useRef<SVGGElement>(null);
 
   const [lineData, setLineData] = useState<string | null>(null);
   const [scaleX, setScaleX] = useState<d3.ScaleLinear<number, number>>();
   const [scaleY, setScaleY] = useState<d3.ScaleLinear<number, number>>();
+
+  useEffect(() => {
+    if (!showScale || !scaleX || !gx.current) return;
+    d3.select(gx.current).call(d3.axisBottom(scaleX));
+  }, [gx, scaleX, showScale]);
+  useEffect(() => {
+    if (!showScale || !scaleY || !gy.current) return;
+    d3.select(gy.current).call(d3.axisLeft(scaleY));
+  }, [gy, scaleY, showScale]);
 
   useEffect(() => {
     const x = d3.scaleLinear(
@@ -49,6 +63,12 @@ export default function LinePlot(props: Props) {
 
   return (
     <svg width={width} height={height}>
+      {showScale && (
+        <>
+          <g ref={gx} transform={`translate(0,${height - marginBottom})`} />
+          <g ref={gy} transform={`translate(${marginLeft},0)`} />
+        </>
+      )}
       {lineData && (
         <path
           fill='none'
