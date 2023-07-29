@@ -4,6 +4,7 @@ import * as d3 from 'd3';
 import { useEffect, useState } from 'react';
 import AxisBottom from './axis-bottom';
 import AxisLeft from './axis-left';
+import Bars from './bars';
 import { ChartBaseProps } from '@/types/chart';
 
 export type DataType = {
@@ -51,10 +52,13 @@ export default function BarChart({
       height={height + marginTop + marginBottom}
     >
       <g transform={`translate(${marginLeft}, ${marginTop})`}>
-        {scaleX && (
-          <AxisBottom scale={scaleX} transform={`translate(0, ${height})`} />
+        {scaleX && scaleY && (
+          <>
+            <AxisBottom scale={scaleX} transform={`translate(0, ${height})`} />
+            <AxisLeft scale={scaleY} />
+            <Bars data={data} height={height} scaleX={scaleX} scaleY={scaleY} />
+          </>
         )}
-        {scaleY && <AxisLeft scale={scaleY} />}
       </g>
     </svg>
   );

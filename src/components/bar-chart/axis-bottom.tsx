@@ -1,8 +1,10 @@
 import * as d3 from 'd3';
 import { useEffect, useRef } from 'react';
 
+export type BottomScaleType = d3.ScaleBand<string>;
+
 type Props = {
-  scale: d3.ScaleBand<string>;
+  scale: BottomScaleType;
   transform: string;
 };
 

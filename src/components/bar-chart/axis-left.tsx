@@ -1,8 +1,10 @@
 import * as d3 from 'd3';
 import { useEffect, useRef } from 'react';
 
+export type LeftScaleType = d3.ScaleLinear<number, number>;
+
 type Props = {
-  scale: d3.ScaleLinear<number, number>;
+  scale: LeftScaleType;
 };
 
 export default function AxisLeft({ scale }: Props) {
