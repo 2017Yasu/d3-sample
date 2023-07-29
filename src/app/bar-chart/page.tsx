@@ -1,5 +1,5 @@
-import { type DataType } from '@/components/bar-chart';
 import dynamic from 'next/dynamic';
+import { type DataType } from '@/components/bar-chart';
 
 const BarChartComponent =
   typeof window === undefined

@@ -1,5 +1,5 @@
-import dynamic from 'next/dynamic';
 import * as d3 from 'd3';
+import dynamic from 'next/dynamic';
 
 const LinePlotComponent =
   typeof window === undefined

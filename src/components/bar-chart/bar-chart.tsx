@@ -1,9 +1,9 @@
 'use client';
 
-import { ChartBaseProps } from '@/types/chart';
 import * as d3 from 'd3';
 import { useEffect, useState } from 'react';
 import AxisBottom from './axis-bottom';
+import { ChartBaseProps } from '@/types/chart';
 
 export type DataType = {
   label: string;
