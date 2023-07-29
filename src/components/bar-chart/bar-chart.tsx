@@ -3,6 +3,7 @@
 import * as d3 from 'd3';
 import { useEffect, useState } from 'react';
 import AxisBottom from './axis-bottom';
+import AxisLeft from './axis-left';
 import { ChartBaseProps } from '@/types/chart';
 
 export type DataType = {
@@ -24,6 +25,7 @@ export default function BarChart({
   marginLeft = 40,
 }: Props) {
   const [scaleX, setScaleX] = useState<d3.ScaleBand<string>>();
+  const [scaleY, setScaleY] = useState<d3.ScaleLinear<number, number>>();
 
   useEffect(() => {
     setScaleX(() =>
@@ -34,6 +36,15 @@ export default function BarChart({
     );
   }, [data, width]);
 
+  useEffect(() => {
+    setScaleY(() =>
+      d3
+        .scaleLinear()
+        .domain([0, Math.max(...data.map(({ value }) => value))])
+        .range([height, 0]),
+    );
+  }, [data, height]);
+
   return (
     <svg
       width={width + marginLeft + marginRight}
@@ -43,6 +54,7 @@ export default function BarChart({
         {scaleX && (
           <AxisBottom scale={scaleX} transform={`translate(0, ${height})`} />
         )}
+        {scaleY && <AxisLeft scale={scaleY} />}
       </g>
     </svg>
   );
