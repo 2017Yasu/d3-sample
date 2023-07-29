@@ -10,10 +10,13 @@ export default function Home() {
             <Link href={'/drawer'}>Drawer</Link>
           </li>
           <li>
-            <Link href={'/line-plot'}>LinePlot</Link>
+            <Link href={'/line-plot'}>Line Plot</Link>
           </li>
           <li>
-            <Link href={'/tracking-line'}>TrackingLine</Link>
+            <Link href={'/tracking-line'}>Tracking Line</Link>
+          </li>
+          <li>
+            <Link href={'/bar-chart'}>Bar Chart</Link>
           </li>
         </ul>
       </div>

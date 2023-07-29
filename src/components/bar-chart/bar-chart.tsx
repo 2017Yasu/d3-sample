@@ -1,9 +1,11 @@
+'use client';
+
 import { ChartBaseProps } from '@/types/chart';
 import * as d3 from 'd3';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AxisBottom from './axis-bottom';
 
-type DataType = {
+export type DataType = {
   label: string;
   value: number;
 };
@@ -21,16 +23,26 @@ export default function BarChart({
   marginBottom = 30,
   marginLeft = 40,
 }: Props) {
-  const [scaleX] = useState<d3.ScaleBand<string>>(
-    d3
-      .scaleBand()
-      .domain(data.map(({ label }) => label))
-      .range([0, width]),
-  );
+  const [scaleX, setScaleX] = useState<d3.ScaleBand<string>>();
+
+  useEffect(() => {
+    setScaleX(() =>
+      d3
+        .scaleBand()
+        .domain(data.map(({ label }) => label))
+        .range([0, width]),
+    );
+  }, [data, width]);
+
   return (
-    <svg width={width} height={height}>
-      <g transform={`transform(${marginLeft}, ${marginTop})`}>
-        <AxisBottom scale={scaleX} transform={`translate(0, ${height})`} />
+    <svg
+      width={width + marginLeft + marginRight}
+      height={height + marginTop + marginBottom}
+    >
+      <g transform={`translate(${marginLeft}, ${marginTop})`}>
+        {scaleX && (
+          <AxisBottom scale={scaleX} transform={`translate(0, ${height})`} />
+        )}
       </g>
     </svg>
   );
