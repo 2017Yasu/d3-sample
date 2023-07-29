@@ -56,7 +56,13 @@ export default function BarChart({
           <>
             <AxisBottom scale={scaleX} transform={`translate(0, ${height})`} />
             <AxisLeft scale={scaleY} />
-            <Bars data={data} height={height} scaleX={scaleX} scaleY={scaleY} />
+            <Bars
+              data={data}
+              height={height}
+              scaleX={scaleX}
+              scaleY={scaleY}
+              barScale={0.5}
+            />
           </>
         )}
       </g>
