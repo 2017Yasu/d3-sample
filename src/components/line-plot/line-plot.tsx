@@ -1,16 +1,11 @@
 'use client';
 
+import { ChartBaseProps } from '@/types/chart';
 import * as d3 from 'd3';
 import { useEffect, useRef, useState } from 'react';
 
-type Props = {
+type Props = ChartBaseProps & {
   data: number[];
-  width?: number;
-  height?: number;
-  marginTop?: number;
-  marginRight?: number;
-  marginBottom?: number;
-  marginLeft?: number;
   showScale?: boolean;
 };
 
