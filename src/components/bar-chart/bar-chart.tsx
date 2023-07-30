@@ -2,10 +2,12 @@
 
 import * as d3 from 'd3';
 import { useEffect, useState } from 'react';
+
+import { ChartBaseProps } from '@/types/chart';
+
 import AxisBottom from './axis-bottom';
 import AxisLeft from './axis-left';
 import Bars from './bars';
-import { ChartBaseProps } from '@/types/chart';
 
 export type DataType = {
   label: string;

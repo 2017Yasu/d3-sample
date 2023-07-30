@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+
 import { BottomScaleType } from './axis-bottom';
 import { LeftScaleType } from './axis-left';
 import { DataType } from './bar-chart';

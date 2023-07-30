@@ -2,6 +2,7 @@
 
 import * as d3 from 'd3';
 import { useCallback, useState, MouseEvent } from 'react';
+
 import LinePlot from '../line-plot';
 
 export default function TrackingLine() {

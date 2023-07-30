@@ -2,8 +2,10 @@
 
 import * as d3 from 'd3';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import DraggableCircle from './draggable-circle';
+
 import { type CanvasBaseProps } from '@/types/canvas';
+
+import DraggableCircle from './draggable-circle';
 
 type Circle = {
   x: number;

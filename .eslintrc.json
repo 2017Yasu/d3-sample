@@ -3,9 +3,22 @@
   "rules": {
     "sort-imports": "off",
     "import/order": ["error", {
+      "pathGroups": [
+        {
+          "pattern": "@/**/*",
+          "group": "external",
+          "position": "after"
+        },
+        {
+          "pattern": "./**/*",
+          "group": "external",
+          "position": "after"
+        }
+      ],
       "alphabetize": {
         "order": "asc"
-      }
+      },
+      "newlines-between": "always"
     }]
   }
 }

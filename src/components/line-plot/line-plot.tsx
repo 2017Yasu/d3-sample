@@ -2,6 +2,7 @@
 
 import * as d3 from 'd3';
 import { useEffect, useRef, useState } from 'react';
+
 import { ChartBaseProps } from '@/types/chart';
 
 type Props = ChartBaseProps & {
