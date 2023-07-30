@@ -1,7 +1,8 @@
 'use client';
 
 import * as d3 from 'd3';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import DraggableCircle from './draggable-circle';
 import { type CanvasBaseProps } from '@/types/canvas';
 
 type Circle = {
@@ -24,15 +25,26 @@ export default function MoveCircles({
 }: Props) {
   const [circles, setCircles] = useState<Circle[]>([]);
 
+  const circleRefs = useRef<SVGCircleElement[]>([]);
+
   useEffect(() => {
     setCircles(
       d3.range(count).map((i) => ({
-        x: Math.random() * (width - radius * 2) + radius,
-        y: Math.random() * (height - radius * 2) + radius,
+        x: Math.ceil(Math.random() * (width - radius * 2) + radius),
+        y: Math.ceil(Math.random() * (height - radius * 2) + radius),
       })),
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [height, radius, width]);
+
+  const handleUpdateCirclePosition = useCallback(
+    (i: number, x: number, y: number) => {
+      setCircles((old) =>
+        old.map((value, index) => (index === i ? { x, y } : value)),
+      );
+    },
+    [],
+  );
 
   return (
     <svg
@@ -43,12 +55,13 @@ export default function MoveCircles({
     >
       {circles &&
         circles.map(({ x, y }, i) => (
-          <circle
+          <DraggableCircle
             key={i}
-            cx={x}
-            cy={y}
+            x={x}
+            y={y}
             r={radius}
             fill={d3.schemeCategory10[i % 10]}
+            onPositionChange={(x, y) => handleUpdateCirclePosition(i, x, y)}
           />
         ))}
     </svg>
