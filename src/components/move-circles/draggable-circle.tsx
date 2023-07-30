@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback } from 'react';
 
 type Props = {
   x: number;
@@ -12,16 +12,12 @@ type Props = {
 function Circle(props: Props) {
   const { x, y, r, fill, onPositionChange } = props;
 
-  const [num] = useState(Math.random());
-
   const initDragEvents = useCallback(
     (selection: d3.Selection<SVGCircleElement, unknown, null, undefined>) => {
-      console.log('init drag event', num);
       const handleDragStart = (
         event: d3.D3DragEvent<SVGCircleElement, unknown, null>,
         d: unknown,
       ) => {
-        console.log('drag start');
         selection.raise().attr('stroke', 'currentColor');
       };
 
@@ -29,7 +25,6 @@ function Circle(props: Props) {
         event: d3.D3DragEvent<SVGCircleElement, unknown, null>,
         d: unknown,
       ) => {
-        console.log('dragging');
         onPositionChange(event.x, event.y);
       };
 
@@ -37,7 +32,6 @@ function Circle(props: Props) {
         event: d3.D3DragEvent<SVGCircleElement, unknown, null>,
         d: unknown,
       ) => {
-        console.log('drag end');
         selection.raise().attr('stroke', null);
       };
 

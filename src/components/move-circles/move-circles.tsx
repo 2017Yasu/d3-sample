@@ -25,8 +25,6 @@ export default function MoveCircles({
 }: Props) {
   const [circles, setCircles] = useState<Circle[]>([]);
 
-  const circleRefs = useRef<SVGCircleElement[]>([]);
-
   useEffect(() => {
     setCircles(
       d3.range(count).map((i) => ({
